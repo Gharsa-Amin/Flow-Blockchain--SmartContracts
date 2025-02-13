@@ -6,7 +6,8 @@
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
 	"contracts": {
-		"HelloWorld": "./HelloWorld.cdc"
+		"HelloWorld": "./HelloWorld.cdc",
+		"contract Art": "./Art.cdc"
 	},
 	"accounts": {
 		"emulator-account": {
@@ -15,8 +16,8 @@
 		}
 	},
 	"deployments": {
-		"emulator": {
-			"emulator-account": ["HelloWorld"]
-		}
-	}
+  "emulator": {
+    "emulator-account": ["HelloWorld", "contract Art"]
+  }
+}
 }

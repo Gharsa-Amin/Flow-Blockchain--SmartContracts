@@ -10,4 +10,5 @@ var Gharsa: String = 3
 //var People: [String] = ["Alice", "Bob", "Tony"]
 //People.append("Sara", "Sonya")
 // People.remove(at: 1)
-//log(people.contains("Bob")); 
+//log(People.contains("Bob")); 
+//log(People.lenght); 
