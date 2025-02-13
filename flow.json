@@ -1,0 +1,22 @@
+{
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"testing": "127.0.0.1:3569",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"contracts": {
+		"HelloWorld": "./HelloWorld.cdc"
+	},
+	"accounts": {
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"key": "d1cee73eb866a5f8293943abb7dcbc210d5d9a3c0337042dcb3d9ec1cb90f534"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"emulator-account": ["HelloWorld"]
+		}
+	}
+}
