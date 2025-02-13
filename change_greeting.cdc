@@ -9,3 +9,4 @@ transaction(myNewGreeting: String) {
     log("We're done!")
   }
 }
+//how to send transaction in Cadence! 
