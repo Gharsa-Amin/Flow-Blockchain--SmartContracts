@@ -1,11 +1,11 @@
-access(all) contract Art {
+access(all) contract Art { //we defined a new contract named Contract Art 
 
     // this will act as an 'id' for
     // new art pieces
-    access(all) var totalArtPieces: Int
-    access(all) var artPieces: {Int: ArtPiece}
+    access(all) var totalArtPieces: 
+    access(all) var artPieces: {Int: ArtPiece} //We defined a dictionary named artPieces that maps an ‘id’ to an ArtPiece struct with that ‘id’
 
-    access(all) struct ArtPiece {
+    access(all) struct ArtPiece { //We defined a new Struct called ArtPiece that contains 4 fields
         access(all) let id: Int
         access(all) let name: String
         access(all) let artLink: String
@@ -19,7 +19,7 @@ access(all) contract Art {
         }
     }
 
-    access(all) fun uploadArt(name: String, artLink: String, hoursWorkedOn: Int) {
+    access(all) fun uploadArt(name: String, artLink: String, hoursWorkedOn: Int) { //creating a function for adding a new ID.... 
         let id: Int = Art.totalArtPieces
         let newArtPiece = ArtPiece(id: id, name: name, artLink: artLink, hoursWorkedOn: hoursWorkedOn)
         // store the new art piece, mapped to its `id`
