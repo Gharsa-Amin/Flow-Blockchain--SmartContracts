@@ -1,7 +1,10 @@
-access(all) resource Pokeman {
-    access(all) let name: String 
+access(all) contract Pokeman {
+    // Renaming resource to avoid conflict
+    access(all) resource PokemanResource {
+        access(all) let name: String 
 
-    init(){
-        self.name = "Pekachu"
+        init() {
+            self.name = "Pikachu"
+        }
     }
 }
