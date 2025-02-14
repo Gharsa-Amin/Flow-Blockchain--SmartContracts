@@ -1,15 +1,19 @@
 access(all) contract Game {
-
+// will track how many Pokemon
+    // have been created
+    access(all) var totalPokemonCreated: Int
     // PokemonDetails
     // Description: Holds all of the static details
     // of the Pokemon. Useful as an easy container.
     access(all) struct PokemonDetails {
+         access(all) let id: UInt64
         access(all) let name: String
         access(all) let dateCreated: UFix64
         // fire, water, electric...
         access(all) let type: String
 
-        init(name: String, dateCreated: UFix64, type: String) {
+        init(id: UInt64, name: String, dateCreated: UFix64, type: String) {
+            self.id = id
             self.name = name
             self.dateCreated = dateCreated
             self.type = type
@@ -27,11 +31,15 @@ access(all) contract Game {
             // gets the timestamp of the current block (in unix seconds)
             let currentTime: UFix64 = getCurrentBlock().timestamp
             self.details = PokemonDetails(
+                id: self.uuid,
                 name: name,
                 dateCreated: currentTime,
                 type: type
             )
             self.xp = 0
+            // increment the totalPokemonCreated by 1
+            // every time a new resource is created
+            Game.totalPokemonCreated = Game.totalPokemonCreated + 1
         }
     }
 
@@ -43,6 +51,10 @@ access(all) contract Game {
         let newPokemon: @Game.Pokemon <- create Pokemon(name: name, type: type)
         return <- newPokemon
     }
+    // / don't forget to initialize
+    // our variable!
+    init() {
+        self.totalPokemonCreated = 0
 }
 
 
@@ -50,3 +62,5 @@ access(all) contract Game {
 //You can only make a new resource with the create keyword. The create keyword can only ever be used inside the contract. This means you, as the developer, can control when they are made. This is not true for structs, since structs can be created outside the contract in structs and transactions.
 //To move resources around you must use the <- “move” operator. In Cadence, you cannot simply use the = to put a resource somewhere. You MUST use the <- “move operator” to explicity “move” the resource around.
 //You use the destroy keyword to destroy a resource (we will see this later)
+//We added a new totalPokemonCreated contract state variable and initialized it to 0 in our contract init function
+// Incremented totalPokemonCreated everytime a new Pokemon resource is created. 

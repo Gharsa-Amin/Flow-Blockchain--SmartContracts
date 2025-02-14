@@ -6,7 +6,8 @@
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
 	"contracts": {
-		"Pokeman": "./Pokemon.cdc"
+		"Pokeman": "./Pokemon.cdc", 
+		"Game": "./Game.cdc"
 	},
 	"accounts": {
 		"emulator-account": {
