@@ -6,7 +6,7 @@ transaction (name: String, type: String) {
     }
 
     execute {
-        let newPokemon <- Game.createPokemon(name: "Pikachu", type: "water")
+        let newPokemon <- Game.createPokemon(name: String, type: Type)
         log(newPokemon.details)
         destroy newPokemon // destroys the resource after use
     }
