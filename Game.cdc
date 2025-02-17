@@ -32,6 +32,12 @@ access(all) contract Game {
     access(all) resource Pokemon {
         access(all) let details: PokemonDetails
         access(all) var xp: Int
+        
+        access(all) fun levelUp() {
+        self.xp = self.xp + 1
+    } 
+
+
 
         init(name: String, type: String) {
             // gets the timestamp of the current block (in unix seconds)
@@ -48,6 +54,27 @@ access(all) contract Game {
             Game.totalPokemonCreated = Game.totalPokemonCreated + 1
         }
     }
+access(all) fun battle(pokemonId1: UInt64, pokemonId2: UInt64) {
+    // equals either 1 or 2
+    let randomNumber: UInt64 = self.getRandom(min: 1, max: 2)
+    // if the random number is 1, use `pokemonId1`. Otherwise use `pokemonId2`
+    let winnerPokemonId = randomNumber == 1 ? pokemonId1 : pokemonId2
+
+    // move the Pokemon resource out of `storedPokemon`
+    let pokemon <- self.storedPokemon.remove(key: winnerPokemonId)
+                    ?? panic("Pokemon does not exist.")
+    // level it up
+    pokemon.levelUp()
+    // move the resource back into the dictionary
+    self.storedPokemon[winnerPokemonId] <-! pokemon
+}
+
+// gets a number [min, max]
+access(all) fun getRandom(min: UInt64, max: UInt64): UInt64 {
+    // revertibleRandom is a built-in random function to Cadence!
+    let randomNumber: UInt64 = revertibleRandom<UInt64>()
+    return (randomNumber % (max + 1 - min)) + min
+}
 
     // createPokemon
     // Description: Creates a new Pokemon using a name and type and returns
