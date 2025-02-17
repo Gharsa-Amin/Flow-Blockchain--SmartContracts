@@ -5,8 +5,7 @@
 		"testing": "127.0.0.1:3569",
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
-	"contracts": {
-		"Pokeman": "./Pokemon.cdc", 
+	"contracts": { 
 		"Game": "./Game.cdc"
 	},
 	"accounts": {
@@ -17,7 +16,7 @@
 	},
 	"deployments": {
   "emulator": {
-    "emulator-account": ["Pokeman"]
+    "emulator-account": ["Game"]
   }
 }
 }

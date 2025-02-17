@@ -82,7 +82,7 @@ access(all) contract Game {
     // our variable!
     init() {
         self.totalPokemonCreated = 0
-         self.storedPokemon <- {}
+        self.storedPokemon <- {}
 }
 
 }
