@@ -1,13 +1,15 @@
 import Game from "./Game.cdc"
 
-transaction (name: String, type: String) {
-    prepare(signer: &Account) {
-        // This section can be left empty as you're creating a new Pokemon.
-    }
+transaction(name: String, type: String) {
+  // notice the `SaveValue` entitlement - this allows
+  // us to call the `save` function
+  prepare(signer: auth(SaveValue) &Account) {
+    // create a new pokemon
+    let newPokemon: @Game.Pokemon <- Game.createPokemon(name: name, type: type)
+    // saves `newPokemon` to my account storage at this path:
+    // /storage/MyPokemon
+    signer.storage.save(<- newPokemon, to: /storage/MyPokemon)
+  }
 
-    execute {
-        let newPokemon <- Game.createPokemon(name: name, type: type)
-        log(newPokemon.details)
-        destroy newPokemon // destroys the resource after use
-    }
+  execute {}
 }
